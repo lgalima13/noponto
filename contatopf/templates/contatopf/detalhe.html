@@ -1,0 +1,8 @@
+<form>
+    <div>{{ form.nome }}</div>
+    <div>{{ form.sexo }}</div>
+    <div>
+        <a href="/contatopf/contatoeditar/{{contato.id}}" role="button">Editar</a>
+        <a href="{% url 'ContatoLista' %}" role="button">Voltar</a>
+    </div>
+</form>

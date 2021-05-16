@@ -1,0 +1,9 @@
+<form method="post">
+    {% csrf_token %}
+    <div>{{ form.nome }}</div>
+    <div>{{ form.sexo }}</div>
+    <div>
+        <button type="submit">Salvar</button>
+        <a href="{% url 'ContatoDetalhe' contato.id %}" role="button">Voltar</a>
+    </div>
+</form>
