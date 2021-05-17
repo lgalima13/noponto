@@ -1,5 +1,6 @@
 {% load crispy_forms_tags %}
-<form>
+<form method="POST">
+    {% csrf_token %}
     <div>{{ form.nome | as_crispy_field }}</div>
     <div>{{ form.sexo | as_crispy_field }}</div>
     <div>{{ form.datanascimento | as_crispy_field }}</div>
@@ -23,7 +24,7 @@
     <div>{{ form.autorizacao | as_crispy_field }}</div>
     <div>{{ form.ativo | as_crispy_field }}</div>
     <div>
-        <a href="/contatopf/contatoeditar/{{contato.id}}" role="button">Editar</a>
+        <button type="submit">Salvar</button>
         <a href="{% url 'ContatoLista' %}" role="button">Voltar</a>
     </div>
 </form>

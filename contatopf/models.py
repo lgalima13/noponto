@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class ContatoPF(models.Model):
     SEXO_CHOICES = (
@@ -22,7 +23,7 @@ class ContatoPF(models.Model):
         ('final', 'Final de Semana'),
         ('flexi', 'Flexível'),
     )
-    nome = models.CharField(max_length=150, null=False)
+    nome = models.CharField(max_length=150, null=False, verbose_name='Nome Completo')
     datanascimento = models.DateField()
     datacadastro = models.DateTimeField(auto_now=True)
     sexo = models.CharField(max_length=10,
@@ -34,10 +35,10 @@ class ContatoPF(models.Model):
     bairro = models.CharField(max_length=150, blank=True)
     cidade = models.CharField(max_length=150, blank=True)
     cep = models.CharField(max_length=10, blank=True)
-    fone1 = models.CharField(max_length=20, blank=True)
-    fone2 = models.CharField(max_length=20, blank=True)
-    fone3 = models.CharField(max_length=20, blank=True)
-    fone4 = models.CharField(max_length=20, blank=True)
+    fone1 = models.CharField(max_length=20, blank=True, null=True)
+    fone2 = models.CharField(max_length=20, blank=True, null=True)
+    fone3 = models.CharField(max_length=20, blank=True, null=True)
+    fone4 = models.CharField(max_length=20, blank=True, null=True)
     contatoemergencia = models.CharField(max_length=150, null=False)
     parentesco = models.CharField(max_length=50, null=False)
     email = models.EmailField(blank=True)
@@ -65,6 +66,7 @@ class Promotor(models.Model):
     altura = models.IntegerField(blank=True)
     manequim = models.IntegerField(blank=True)
     calcado = models.IntegerField(blank=True)
+    objects = models.Manager()
 
 class Motorista(models.Model):
     CATEGORIA_CHOICES = (
