@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse, redirect
-from .forms import ContatoPFForm, PromotorForm, MotoristaForm, EventoForm
+from .forms import ContatoPFForm, PromotorForm, MotoristaForm, EventoForm, PreCadastroForm
 from .models import ContatoPF, Promotor, Motorista, Evento, PreCadastro
 
 # Create your views here.
@@ -8,6 +8,21 @@ def PreCadastroLista(request):
     precadastros = PreCadastro.objects.filter(ativo=True)
     return render(request,
                   'precadastro/lista.html', {'precadastros': precadastros})
+
+def PreCadastroCadastro(request):
+    precadastro = PreCadastro.objects.all()
+    if request.method == 'POST':
+        form = PreCadastroForm(request.POST)
+        if form.is_valid():
+            precadastro = form.save(commit=False)
+            precadastro.save()
+            return  redirect('/precadastro/')
+    else:
+        form = PreCadastroForm
+    return render(request,
+                  'precadastro/cadastro.html', {'precadastro': precadastro,
+                                                'form': form})
+
 
 def ContatoLista(request):
     contatos = ContatoPF.objects.filter(ativo=True)

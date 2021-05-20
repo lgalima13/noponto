@@ -1,7 +1,7 @@
 from django import forms
 from .models import ContatoPF, Motorista, Promotor, Reporter, Evento, PreCadastro
 
-class PreCadastro(forms.ModelForm):
+class PreCadastroForm(forms.ModelForm):
     nome = forms.CharField(label='Nome Completo', widget=forms.TextInput(
         attrs={'class': 'form-control', 'required': 'true'}))
     cpf = forms.CharField(required=False, widget=forms.TextInput(
