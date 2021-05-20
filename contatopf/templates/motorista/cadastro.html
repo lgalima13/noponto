@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+    <div>{{ form.contatopf | as_crispy_field }}</div>
+    <div>{{ form.categoria | as_crispy_field }}</div>
+    <div>{{ form.datahabilitacao | as_crispy_field }}</div>
+    <div>{{ form.validadehabilitacao | as_crispy_field }}</div>
+    <div>
+        <button type="submit">Salvar</button>
+        <a href="{% url 'MotoristaLista' %}" role="button">Voltar</a>
+    </div>
+</form>

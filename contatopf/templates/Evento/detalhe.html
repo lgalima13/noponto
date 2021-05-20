@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+<form>
+    <div>{{ form.precadastro | as_crispy_field }}</div>
+    <div>{{ form.nome | as_crispy_field }}</div>
+    <div>
+        <a href="/contatopf/evento/eventoeditar/{{evento.id}}" role="button">Editar</a>
+        <a href="{% url 'EventoLista' %}" role="button">Voltar</a>
+    </div>
+</form>
+<!--{% for promotor in promotores %}
+<div><b>Promotor:</b> Altura: {{ promotor.altura }} - Manequim: {{ promotor.manequim }} - Calçado: {{ promotor.calcado }} </div>
+{% endfor %} -->

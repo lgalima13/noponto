@@ -1,8 +1,14 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse, redirect
-from .forms import ContatoPFForm
-from .models import ContatoPF, Promotor
+from .forms import ContatoPFForm, PromotorForm, MotoristaForm, EventoForm
+from .models import ContatoPF, Promotor, Motorista, Evento, PreCadastro
 
 # Create your views here.
+
+def PreCadastroLista(request):
+    precadastros = PreCadastro.objects.filter(ativo=True)
+    return render(request,
+                  'precadastro/lista.html', {'precadastros': precadastros})
+
 def ContatoLista(request):
     contatos = ContatoPF.objects.filter(ativo=True)
     return render(request,
@@ -24,10 +30,27 @@ def ContatoCadastro(request):
 
 def ContatoDetalhe(request, id):
     contato = get_object_or_404(ContatoPF, pk=id)
+    promotores = Promotor.objects.filter(precadastro=id)
+    motoristas = Motorista.objects.filter(precadastro=id)
     form = ContatoPFForm(instance=contato)
     return render(request,
                   'contatopf/detalhe.html', {'contato': contato,
+                                             'promotores': promotores,
+                                             'motoristas': motoristas,
                                              'form': form})
+
+def EventoDetalhe(request, id):
+    evento = get_object_or_404(Evento, pk=id)
+    form = EventoForm(instance=evento)
+    return render(request,
+                  'evento/detalhe.html', {'evento': evento,
+                                          'form': form})
+
+def EventoLista(request):
+    eventos = Evento.objects.all()
+    return render(request,
+                  'evento/lista.html', {'eventos': eventos})
+
 
 def ContatoEditar(request, id):
     contato = get_object_or_404(ContatoPF, pk=id)
@@ -50,6 +73,41 @@ def ContatoEditar(request, id):
 def PromotorLista(request):
     promotores = Promotor.objects.all()
     return render(request,
-                  'motorista/lista.html', {'promotores': promotores})
+                  'promotor/lista.html', {'promotores': promotores})
+
+def PromotorCadastro(request):
+    promotores = Promotor.objects.all()
+    if request.method == 'POST':
+        form = PromotorForm(request.POST)
+        if form.is_valid():
+            promotores = form.save(commit=False)
+            promotores.save()
+            return redirect('/promotorlista/')
+    else:
+        form = PromotorForm
+    return render(request,
+                  'promotor/cadastro.html', {'promotores': promotores,
+                                                       'form': form})
+
+def MotoristaCadastro(request):
+    motoristas = Motorista.objects.all()
+    if request.method == 'POST':
+        form = MotoristaForm(request.POST)
+        if form.is_valid():
+            motoristas = form.save(commit=False)
+            motoristas.save()
+            return redirect('/motoristalista/')
+    else:
+        form = MotoristaForm
+    return render(request,
+                  'motorista/cadastro.html', {'motoristas': motoristas,
+                                              'form': form})
+
+def MotoristaLista(request):
+    motoristas = Motorista.objects.all()
+    return render(request,
+                  'motorista/lista.html', {'motoristas': motoristas})
+
+
 
 

@@ -1,4 +1,4 @@
 {% for contatopf in contatos %}
-    <div><a href="/contatopf/contatodetalhe/{{ contatopf.id }}">{{ contatopf.nome }}</a></div>
+<div><a href="/contatopf/contatodetalhe/{{ contatopf.id }}">{{ precadastro.id }}</a>{{ contatopf.sexo }} - {{ contatopf.bairro }}</div>
 {% endfor %}
 <a href="{% url 'ContatoCadastro' %}" role="button">Cadastro</a>

@@ -1,10 +1,8 @@
 {% load crispy_forms_tags %}
 <form>
-    <div>{{ form.nome | as_crispy_field }}</div>
     <div>{{ form.sexo | as_crispy_field }}</div>
     <div>{{ form.datanascimento | as_crispy_field }}</div>
     <div>{{ form.rg | as_crispy_field }}</div>
-    <div>{{ form.cpf | as_crispy_field }}</div>
     <div>{{ form.endereco | as_crispy_field }}</div>
     <div>{{ form.bairro | as_crispy_field }}</div>
     <div>{{ form.cidade | as_crispy_field }}</div>
@@ -15,7 +13,6 @@
     <div>{{ form.fone3 | as_crispy_field }}</div>
     <div>{{ form.fone4 | as_crispy_field }}</div>
     <div>{{ form.parentesco | as_crispy_field }}</div>
-    <div>{{ form.email | as_crispy_field }}</div>
     <div>{{ form.instagram | as_crispy_field }}</div>
     <div>{{ form.escolaridade | as_crispy_field }}</div>
     <div>{{ form.faculdade | as_crispy_field }}</div>
@@ -27,3 +24,10 @@
         <a href="{% url 'ContatoLista' %}" role="button">Voltar</a>
     </div>
 </form>
+{% for promotor in promotores %}
+<div><b>Promotor:</b> Altura: {{ promotor.altura }} - Manequim: {{ promotor.manequim }} - Calçado: {{ promotor.calcado }} </div>
+{% endfor %}
+
+{% for motorista in motoristas %}
+<div><b>{{ motorista.get_categoria_display }}</b> - Data Habilitação: {{ motorista.datahabilitacao }} - Validade: {{ motorista.validadehabilitacao }} </div>
+{% endfor %}

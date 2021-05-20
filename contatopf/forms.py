@@ -1,34 +1,84 @@
 from django import forms
-from .models import ContatoPF, Motorista, Promotor, Reporter
+from .models import ContatoPF, Motorista, Promotor, Reporter, Evento, PreCadastro
+
+class PreCadastro(forms.ModelForm):
+    nome = forms.CharField(label='Nome Completo', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    cpf = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    email = forms.EmailField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+
+    class Meta:
+        model = PreCadastro
+        fields = ['nome', 'cpf', 'email']
 
 class ContatoPFForm(forms.ModelForm):
-    nome = forms.CharField(widget=forms.TextInput(
+    precadastro = forms.SelectMultiple(attrs={'class': 'form-control', 'required': 'false'})
+    datanascimento = forms.DateField(required=False, widget=forms.widgets.DateInput(format="%d/%m/%Y"), label='Data Nascimento')
+    sexo = forms.SelectMultiple(attrs={'class': 'form-control', 'required': 'false'})
+    rg = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'class': 'form-control', 'required': 'true'}))
-    datanascimento = forms.DateField(required=False)
-    sexo = forms.SelectMultiple()
-    rg = forms.CharField(required=False)
-    cpf = forms.CharField(required=False)
-    endereco = forms.CharField(required=False)
-    bairro = forms.CharField(required=False)
-    cidade = forms.CharField(required=False)
-    cep = forms.CharField(required=False)
-    fone1 = forms.CharField(required=False)
-    fone2 = forms.CharField(required=False)
-    contatoemergencia = forms.CharField()
-    fone3 = forms.CharField(required=False)
-    fone4 = forms.CharField(required=False)
-    parentesco = forms.CharField(required=False)
-    email = forms.EmailField(required=False)
-    instagram = forms.CharField(required=False)
-    escolaridade = forms.SelectMultiple()
-    faculdade = forms.CharField(required=False)
-    disponibilidade = forms.SelectMultiple()
-    autorizacao = forms.BooleanField(required=False)
+    endereco = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    bairro = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}) )
+    cidade = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    cep = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    fone1 = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    fone2 = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    contatoemergencia = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    fone3 = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    fone4 = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    parentesco = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    instagram = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    escolaridade = forms.SelectMultiple(attrs={'class': 'form-control', 'required': 'false'})
+    faculdade = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    disponibilidade = forms.SelectMultiple(attrs={'class': 'form-control', 'required': 'false'})
+    autorizacao = forms.BooleanField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
     ativo = forms.BooleanField(required=False)
 
     class Meta:
         model = ContatoPF
-        fields = ['nome', 'datanascimento', 'sexo', 'rg', 'cpf', 'endereco', 'bairro', 'cidade', 'cep',
-                  'fone1', 'fone2', 'fone3', 'fone4','contatoemergencia', 'parentesco', 'email', 'instagram', 'escolaridade',
+        fields = ['precadastro', 'datanascimento', 'sexo', 'rg', 'endereco', 'bairro', 'cidade', 'cep',
+                  'fone1', 'fone2', 'fone3', 'fone4','contatoemergencia', 'parentesco', 'instagram', 'escolaridade',
                   'faculdade', 'disponibilidade', 'autorizacao', 'ativo']
 
+class PromotorForm(forms.ModelForm):
+    precadastro = forms.SelectMultiple()
+    altura = forms.IntegerField(required=False)
+    manequim = forms.IntegerField(required=False)
+    calcado = forms.IntegerField(required=False)
+
+    class Meta:
+        model = Promotor
+        fields = ['precadastro', 'altura', 'manequim', 'calcado']
+
+class MotoristaForm(forms.ModelForm):
+    precadastro = forms.SelectMultiple()
+    categoria = forms.SelectMultiple()
+    datahabilitacao = forms.DateField()
+    validadehabilitacao = forms.DateField()
+
+    class Meta:
+        model = Motorista
+        fields = ['precadastro', 'categoria', 'datahabilitacao', 'validadehabilitacao']
+
+class EventoForm(forms.ModelForm):
+    precadastro = forms.SelectMultiple()
+    nome = forms.CharField()
+
+    class Meta:
+        model = Evento
+        fields = ['precadastro', 'nome']

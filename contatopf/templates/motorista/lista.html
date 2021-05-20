@@ -1,3 +1,4 @@
-{% for promotor in promotores %}
-{{ promotor.contatopf }}
+{% for motorista in motoristas %}
+    <div>{{ motorista.contatopf }}</div>
 {% endfor %}
+<a href="{% url 'MotoristaCadastro' %}" role="button">Cadastro</a>

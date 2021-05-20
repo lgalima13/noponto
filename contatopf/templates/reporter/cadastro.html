@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+    <div>{{ form.contatopf | as_crispy_field }}</div>
+    <div>{{ form.altura | as_crispy_field }}</div>
+    <div>{{ form.manequim | as_crispy_field }}</div>
+    <div>{{ form.calcado | as_crispy_field }}</div>
+    <div>
+        <button type="submit">Salvar</button>
+        <a href="{% url 'PromotorLista' %}" role="button">Voltar</a>
+    </div>
+</form>

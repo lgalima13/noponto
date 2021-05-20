@@ -1,30 +1,45 @@
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% block content %}
 <form method="POST">
     {% csrf_token %}
-    <div>{{ form.nome | as_crispy_field }}</div>
-    <div>{{ form.sexo | as_crispy_field }}</div>
-    <div>{{ form.datanascimento | as_crispy_field }}</div>
-    <div>{{ form.rg | as_crispy_field }}</div>
-    <div>{{ form.cpf | as_crispy_field }}</div>
-    <div>{{ form.endereco | as_crispy_field }}</div>
-    <div>{{ form.bairro | as_crispy_field }}</div>
-    <div>{{ form.cidade | as_crispy_field }}</div>
-    <div>{{ form.cep | as_crispy_field }}</div>
-    <div>{{ form.fone1 | as_crispy_field }}</div>
-    <div>{{ form.fone2 | as_crispy_field }}</div>
-    <div>{{ form.contatoemergencia | as_crispy_field }}</div>
-    <div>{{ form.fone3 | as_crispy_field }}</div>
-    <div>{{ form.fone4 | as_crispy_field }}</div>
-    <div>{{ form.parentesco | as_crispy_field }}</div>
-    <div>{{ form.email | as_crispy_field }}</div>
-    <div>{{ form.instagram | as_crispy_field }}</div>
-    <div>{{ form.escolaridade | as_crispy_field }}</div>
-    <div>{{ form.faculdade | as_crispy_field }}</div>
-    <div>{{ form.disponibilidade | as_crispy_field }}</div>
-    <div>{{ form.autorizacao | as_crispy_field }}</div>
-    <div>{{ form.ativo | as_crispy_field }}</div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form.precadastro | as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            {{ form.sexo | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-1">
+            {{ form.datanascimento | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2">
+            {{ form.rg | as_crispy_field }}
+        </div>
+    </div>
+    <div>
+        <div>{{ form.endereco | as_crispy_field }}</div>
+        <div>{{ form.bairro | as_crispy_field }}</div>
+        <div>{{ form.cidade | as_crispy_field }}</div>
+        <div>{{ form.cep | as_crispy_field }}</div>
+        <div>{{ form.fone1 | as_crispy_field }}</div>
+        <div>{{ form.fone2 | as_crispy_field }}</div>
+        <div>{{ form.contatoemergencia | as_crispy_field }}</div>
+        <div>{{ form.fone3 | as_crispy_field }}</div>
+        <div>{{ form.fone4 | as_crispy_field }}</div>
+        <div>{{ form.parentesco | as_crispy_field }}</div>
+        <div>{{ form.instagram | as_crispy_field }}</div>
+        <div>{{ form.escolaridade | as_crispy_field }}</div>
+        <div>{{ form.faculdade | as_crispy_field }}</div>
+        <div>{{ form.disponibilidade | as_crispy_field }}</div>
+        <div>{{ form.autorizacao | as_crispy_field }}</div>
+        <div>{{ form.ativo | as_crispy_field }}</div>
+    </div>
     <div>
         <button type="submit">Salvar</button>
         <a href="{% url 'ContatoLista' %}" role="button">Voltar</a>
     </div>
 </form>
+{% endblock %}

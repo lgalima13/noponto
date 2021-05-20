@@ -1,11 +1,9 @@
 {% load crispy_forms_tags %}
 <form method="post">
     {% csrf_token %}
-    <div>{{ form.nome | as_crispy_field }}</div>
     <div>{{ form.sexo | as_crispy_field }}</div>
     <div>{{ form.datanascimento | as_crispy_field }}</div>
     <div>{{ form.rg | as_crispy_field }}</div>
-    <div>{{ form.cpf | as_crispy_field }}</div>
     <div>{{ form.endereco | as_crispy_field }}</div>
     <div>{{ form.bairro | as_crispy_field }}</div>
     <div>{{ form.cidade | as_crispy_field }}</div>
