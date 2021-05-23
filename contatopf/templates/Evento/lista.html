@@ -1,3 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Eventos{% endblock %}
+
+{% block content %}
+
 {% for evento in eventos %}
     <div><a href="/contatopf/eventodetalhe/{{ evento.id }}">{{ evento.nome }}</a></div>
 {% endfor %}
+
+{% endblock %}

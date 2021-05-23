@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContatoPF, Motorista, Promotor, Reporter, Evento, PreCadastro
+from .models import ContatoPF, Motorista, Promotor, Reporter, Evento, PreCadastro, DataEvento
 
 class PreCadastroForm(forms.ModelForm):
     nome = forms.CharField(label='Nome Completo', widget=forms.TextInput(
@@ -82,3 +82,22 @@ class EventoForm(forms.ModelForm):
     class Meta:
         model = Evento
         fields = ['precadastro', 'nome']
+
+class DataEventoForm(forms.ModelForm):
+    evento = forms.SelectMultiple()
+    dataevento = forms.DateField(required=False, widget=forms.widgets.DateInput(format="%d/%m/%Y"), label='Data')
+    confirmado = forms.BooleanField(required=False)
+    endereco = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    bairro = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    cidade = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    cep = forms.CharField(required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'required': 'true'}))
+    observacoes = forms.CharField(label='Observações',required=False, widget=forms.Textarea(
+        attrs={'class': 'form-control', 'rows':4, 'cols':40}))
+
+    class Meta:
+        model = DataEvento
+        fields = ['evento', 'dataevento', 'confirmado', 'endereco', 'bairro', 'cidade', 'cep', 'observacoes']

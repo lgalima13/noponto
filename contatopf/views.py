@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, reverse, redirect
-from .forms import ContatoPFForm, PromotorForm, MotoristaForm, EventoForm, PreCadastroForm
-from .models import ContatoPF, Promotor, Motorista, Evento, PreCadastro
+from .forms import ContatoPFForm, PromotorForm, MotoristaForm, EventoForm, PreCadastroForm, DataEventoForm
+from .models import ContatoPF, Promotor, Motorista, Evento, DataEvento, PreCadastro
 
 # Create your views here.
 
@@ -65,6 +65,22 @@ def EventoLista(request):
     eventos = Evento.objects.all()
     return render(request,
                   'evento/lista.html', {'eventos': eventos})
+
+def DataEventoLista(request):
+    dataeventos = DataEvento.objects.all()
+    return render(request,
+                  'dataevento/lista.html', {'dataeventos': dataeventos})
+
+def DataEventoDetalhe(request, id):
+    dataevento = get_object_or_404(DataEvento, pk=id)
+    evento = Evento.objects.get(nome=dataevento.evento)
+    precadastro = PreCadastro.objects.get(nome=evento.precadastro)
+    form = DataEventoForm(instance=dataevento)
+    return render(request,
+                  'dataevento/detalhe.html', {'dataevento': dataevento,
+                                              'precadastro': precadastro,
+                                              'evento': evento,
+                                              'form': form})
 
 
 def ContatoEditar(request, id):

@@ -7,7 +7,6 @@ class PreCadastro(models.Model):
     ativo = models.BooleanField(default=True)
     objects = models.Manager()
 
-
     def __str__(self):
         return self.nome
 
@@ -77,6 +76,7 @@ class Promotor(models.Model):
     manequim = models.IntegerField(blank=True)
     calcado = models.IntegerField(blank=True)
     objects = models.Manager()
+
     def __int__(self):
         return self.precadastro
 
@@ -119,7 +119,37 @@ class Evento(models.Model):
     precadastro = models.ManyToManyField(PreCadastro,
                                   blank=True)
     nome = models.CharField(max_length=255)
+    contato1 = models.CharField(max_length=150, null=True)
+    fone1 = models.CharField(max_length=20, blank=True, null=True)
+    contato2 = models.CharField(max_length=150, null=True)
+    fone2 = models.CharField(max_length=20, blank=True, null=True)
+    contato3 = models.CharField(max_length=150, null=True)
+    fone3 = models.CharField(max_length=20, blank=True, null=True)
+    contato4 = models.CharField(max_length=150, null=True)
+    fone4 = models.CharField(max_length=20, blank=True, null=True)
+    observacoes = models.TextField(null=True)
     objects = models.Manager()
 
     def __str__(self):
         return self.nome
+
+class DataEvento(models.Model):
+    evento = models.ForeignKey(Evento,
+                                  verbose_name='Evento',
+                                  on_delete=models.CASCADE,
+                                  null=True,
+                                  blank=True)
+    dataevento = models.DateField()
+    confirmado = models.BooleanField(default=False)
+    endereco = models.CharField(max_length=255, blank=True)
+    bairro = models.CharField(max_length=150, blank=True)
+    cidade = models.CharField(max_length=150, blank=True)
+    cep = models.CharField(max_length=10, blank=True)
+    observacoes = models.TextField(blank=True)
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ('dataevento',)
+
+    def __int__(self):
+        return self.evento

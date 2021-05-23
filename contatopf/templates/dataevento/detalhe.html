@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form.evento | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-1">
+            {{ form.dataevento | as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form.endereco | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-3">
+            {{ form.bairro | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2">
+            {{ form.cidade | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2">
+            {{ form.cep | as_crispy_field }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-11">
+            {{ form.observacoes | as_crispy_field }}
+        </div>
+    </div>
+    <div>
+        <button type="submit">Salvar</button>
+        <a href="/contatopf/dataevento/dataeventoeditar/{{evento.id}}" role="button">Editar</a>
+        <a href="{% url 'ContatoLista' %}" role="button">Voltar</a>
+        <a href="/contatopf/dataeventolista" role="button">Voltar</a>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block promotor %}
+
+{% endblock %}
+
+{% block sidebar %}
+
+<div>
+    <div class="row">
+        <div class="col">
+            <h3>Evento: {{ evento.nome }}</h3> {{ precadastro.nome }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Contatos:</b> {{ evento.contato1 }}: {{ evento.fone1 }}
+        </div>
+        <div class="col">
+           {{ evento.contato2 }}: {{ evento.fone2 }}
+        </div>
+        <div class="col">
+           {{ evento.contato3 }}: {{ evento.fone3 }}
+        </div>
+        <div class="col">
+           {{ evento.contato4 }}: {{ evento.fone4 }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Observações:</b> {{ evento.observacoes }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
